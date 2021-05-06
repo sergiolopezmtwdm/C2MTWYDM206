@@ -9,10 +9,11 @@ import MongoHelper from "./helpers/mongo.helper";
 const mongo = MongoHelper.getInstance(ENV.MONGODB);
 // const tokenHelper = TokenHelper(ENV, mongo);
 
-(async () => {
+// (async () => {
     const app = express();
     app.use(express.json());
     app.use(compression());
+    // app.use(cors({ origin: true, credentials: true }));
     app.use(cors({ origin: true, credentials: true }));
 
     app.get('/', (req: Request, res: Response) => {
@@ -22,7 +23,6 @@ const mongo = MongoHelper.getInstance(ENV.MONGODB);
         });
     })
 
-
     // MANEJO DE SOCKTES
     const httpServer = http.createServer(app);
     const socketIO = require('socket.io')(httpServer);
@@ -31,22 +31,32 @@ const mongo = MongoHelper.getInstance(ENV.MONGODB);
     socketIO.on('connection', (socket: Socket) => {
         // TO DO: Lógica Real-Time
         console.log(`Nuevo cliente conectado con ID: ${socket.id}`);
-        console.log(`Aquí se detecta una nueva conexión de un cliente y se guarda en base de datos con ID: ${socket.id}`);
+        // console.log(`Aquí se detecta una nueva conexión de un cliente y se guarda en base de datos con ID: ${socket.id}`);
+
+        socket.on('message', (payload: any) => {
+            console.log(`Escuchando mensaje ${payload}`);
+            // console.log('Escuchando mensaje', payload);
+            socketIO.emit('broadcast-message', payload);
+        });
+
+        socket.on('disconnect', () => {
+            console.log(`Desconexión del cliente con ID: ${socket.id}`);
+        });
     });
 
     // app.listen(ENV.API.PORT, () => {
     httpServer.listen(ENV.API.PORT, () => {
         console.log(`Servidor Express funcionando correctamente en puerto ${ENV.API.PORT}`);
     });
-    
-})();
+
+// })();
 
 // Handle Error
-process.on('unhandleRejection', (error: any, promise) => {
-    console.log(`Ocurrió un error no controlado de tipo promise rejection`, promise);
-    console.log(`La descripción de error es la siguiente`, error);
-    // Close Mongo
-    mongo.close();
-    process.exit();
-});
+// process.on('unhandleRejection', (error: any, promise) => {
+//     console.log(`Ocurrió un error no controlado de tipo promise rejection`, promise);
+//     console.log(`La descripción de error es la siguiente`, error);
+//     // Close Mongo
+//     mongo.close();
+//     process.exit();
+// });
 
