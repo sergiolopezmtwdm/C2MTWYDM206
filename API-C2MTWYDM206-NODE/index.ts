@@ -6,7 +6,7 @@ import { Socket } from 'socket.io';
 import ENV from './environments/env';
 import MongoHelper from "./helpers/mongo.helper";
 
-const mongo = MongoHelper.getInstance(ENV.MONGODB);
+// const mongo = MongoHelper.getInstance(ENV.MONGODB);
 // const tokenHelper = TokenHelper(ENV, mongo);
 
 // (async () => {

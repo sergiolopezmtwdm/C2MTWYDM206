@@ -393,7 +393,8 @@
   <h2>Next Steps</h2>
   <p>
     <input type="text" #message />
-    <button class="btn btn-success" (click)="sendMessage(message.value)">Enviar</button>
+    <button class="btn btn-success" (click)="sendMessage(message.value)"
+      [disabled]="!socket.statusConnect">Enviar</button>
   </p>
   <p>What do you want to do next with your app?</p>
 

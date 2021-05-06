@@ -22,7 +22,6 @@ export class SocketioService {
   }
 
   checkStatus() {
-    // console.log('revisando estatus');
     this.socket.on('connect', () => {
       console.log('Conectado al Servidor de Sockets');
       this.statusConnect = true;
