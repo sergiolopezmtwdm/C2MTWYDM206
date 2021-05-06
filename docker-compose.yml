@@ -29,18 +29,18 @@ services:
  angular:
   container_name: 'APP-C2MTWYDM206-NG'
   build:
-   context: ~/src/APP-C2MTWYDM206-NG
+   context: ~/src/C2MTWYDM206/APP-C2MTWYDM206-NG
    dockerfile: Dockerfile
   restart: always
 #	volumes:
-#	 . ~/src/APP-C2MTWYDM206-NG:/usr/share/nginx/html
+#	 . ~/src/C2MTWYDM206/APP-C2MTWYDM206-NG:/usr/share/nginx/html
   environment:
     - VIRTUAL_HOST=slopezfu-ng.com
 
  node:
   container_name: 'API-C2MTWYDM206-NODE'
   build:
-   context: ~/src/API-C2MTWYDM206-NODE
+   context: ~/src/C2MTWYDM206/API-C2MTWYDM206-NODE
    dockerfile: Dockerfile
   restart: always
   environment:
