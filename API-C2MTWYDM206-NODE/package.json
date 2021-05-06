@@ -1,5 +1,5 @@
 {
-  "name": "API-C2MTWYDM206-NODE",
+  "name": "api-c2mtwydm206-node",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@types/compression": "^1.7.0",
-    "@types/express": "^4.17.11"
+    "@types/express": "^4.17.11",
+    "@types/mongodb": "^3.6.12"
   }
 }
