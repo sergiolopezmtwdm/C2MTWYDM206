@@ -8,7 +8,7 @@ import MongoHelper from "./helpers/mongo.helper";
 import SocketLogic from './sockets/socket.logic';
 import TokenHelper from "./helpers/token.helper";
 
-const mongo = MongoHelper.getInstance(ENV.MONGODB);
+const mongo = MongoHelper.getInstance(ENV.MONGODB, true);
 const tokenHelper = TokenHelper(ENV, mongo);
 
 (async () => {
