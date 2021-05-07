@@ -29,6 +29,7 @@ export class AuthService {
 
   public setlocalStorage(response: any) {
     const token = (<any>response).token;
+    JSON.stringify(token);
     localStorage.setItem("jwt", token);
   }
 
