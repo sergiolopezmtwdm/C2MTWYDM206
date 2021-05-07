@@ -12,7 +12,7 @@ import { LoginService } from "../../services/login.service";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-
+  title = 'APP-C2MTWYDM206';
   suscription$: Subscription;
 
   constructor(public socket: SocketioService, private authSvc: AuthService, private router: Router, private loginSvc: LoginService) {
@@ -26,17 +26,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  public login = () => {
-    // console.log('intentando logearse');
-    this.loginSvc.login({ correo: 'sergioivan16@gmail.com', apiKey: environment.API_KEY }).subscribe(async response => {
-      await this.loginSvc.setlocalStorage(response);
-      // alert("has iniciado sesión correctamente " + (<any>response).nombreCompleto);
-      alert("has iniciado sesión correctamente ");
-      this.router.navigate(['home']);
-    }, err => {
-      alert("Inicio de sesión fallida");
-    });
-  }
+  // public login = () => {
+  //   // console.log('intentando logearse');
+  //   this.loginSvc.login({ correo: 'sergioivan16@gmail.com', apiKey: environment.API_KEY }).subscribe(async response => {
+  //     await this.loginSvc.setlocalStorage(response);
+  //     // alert("has iniciado sesión correctamente " + (<any>response).nombreCompleto);
+  //     alert("has iniciado sesión correctamente ");
+  //     this.router.navigate(['home']);
+  //   }, err => {
+  //     alert("Inicio de sesión fallida");
+  //   });
+  // }
 
   loginOauth2(provider: string) {
     // console.log('Provider: ', provider);

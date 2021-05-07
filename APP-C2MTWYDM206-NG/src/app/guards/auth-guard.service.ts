@@ -23,7 +23,6 @@ export class AuthGuard implements CanActivate {
       // console.log(this.jwtHelper.decodeToken(token));
       return true;
     }
-    console.log("te la pelaste amigo");
     this.router.navigate(["login"]);
     return false;
     // const isRefreshSuccess = await this.tryRefreshingToken(token));
