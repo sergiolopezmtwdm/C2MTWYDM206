@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "oauth2-2ff20": {
+      "hosting": {
+        "APP-C2MTWYDM206": [
+          "oauth2-2ff20"
+        ]
+      }
+    }
+  }
+}

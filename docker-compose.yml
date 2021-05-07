@@ -15,7 +15,7 @@ services:
     - /var/run/docker.sock:/tmp/docker.sock:ro
 
  mongo:
-  container_name: 'MongoDB-Container'
+  container_name: 'DB-C2MTWYDM206-MONGO'
   image: mongo
   #  restart: unless-stopped
   environment:

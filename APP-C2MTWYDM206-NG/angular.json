@@ -120,6 +120,10 @@
               "devServerTarget": "APP-C2MTWYDM206:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }
