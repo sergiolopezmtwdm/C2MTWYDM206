@@ -4,7 +4,6 @@ import { AuthService } from '../../services/auth.service';
 import { SocketioService } from '../../services/socketio.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { LoginService } from "../../services/login.service";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +14,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   title = 'APP-C2MTWYDM206';
   suscription$: Subscription;
 
-  constructor(public socket: SocketioService, private authSvc: AuthService, private router: Router, private loginSvc: LoginService) {
+  constructor(public socket: SocketioService, private authSvc: AuthService, private router: Router) {
     // this.suscription$ = this.socket.on('broadcast-message').subscribe((payload: any) => {
     this.suscription$ = this.socket.on('broadcast-message').subscribe((payload: any) => {
       // console.log(payload);
@@ -41,8 +40,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   sigIn(provider: string) {
     this.authSvc.loginOAuth2(provider)
       .then((user: any) => {
-        this.loginSvc.login({ correo: user.email, apiKey: '606cbb0d018cc952deb62e05' }).subscribe(async response => {
-          await this.loginSvc.setlocalStorage(response);
+        this.authSvc.login({ correo: user.email, apiKey: '606cbb0d018cc952deb62e05' }).subscribe(async response => {
+          await this.authSvc.setlocalStorage(response);
           alert("has iniciado sesión correctamente " + user.displayName);
           this.router.navigate(['home']);
         }, err => {
