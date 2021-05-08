@@ -85,10 +85,10 @@ const tokenHelper = TokenHelper(ENV, mongo);
                 const token: any = await tokenHelper.create(response.result, apiKey);
                 res.status(response.code).json({ token });
             }
-            res.status(200).json({
-                ok: true,
-                msg: 'API Real-Time funcionando correctamente'
-            });
+            // res.status(200).json({
+            //     ok: true,
+            //     msg: 'API Real-Time funcionando correctamente'
+            // });
         })
 
         // MANEJO DE SOCKTES
