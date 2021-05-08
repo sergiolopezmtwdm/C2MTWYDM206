@@ -93,7 +93,16 @@ const tokenHelper = TokenHelper(ENV, mongo);
 
         // MANEJO DE SOCKTES
         const httpServer = http.createServer(app);
-        const socketIO = require('socket.io')(httpServer);
+        // const socketIO = require('socket.io')(httpServer);
+        const socketIO = require('socket.io')(httpServer, {
+            cors: {
+                origin: true,
+                credentials: true,
+                // 'http://localhost:4200',
+                // 'http://slopezfu-ng.com'
+            },
+            allowEIO3: true
+        });
 
         // Funcionalidad Real-Time        
         socketIO.on('connection', (socket: Socket) => {
