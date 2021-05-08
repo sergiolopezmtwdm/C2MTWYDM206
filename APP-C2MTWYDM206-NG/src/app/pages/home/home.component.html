@@ -1,5 +1,25 @@
-<button type="button" style="width: 85%;" class="btn btn btn-primary w3-red"  (click)="logOut()">Logout</button>
+<div class="row">
+  <div class="col-md-12">
+    <button type="button" style="width: 85%;" class="btn btn btn-primary w3-red"  (click)="logOut()">Logout</button>
+  </div>
+</div>
 
-<p>Usuarios conectados</p>
 
-{{ listaUsuarios | json}}
+<!-- {{ listaUsuarios | json}} -->
+<h3>Usuarios Conectados</h3>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card-deck">
+      <div *ngFor="let user of listaUsuarios" class="card" style="width: 18rem;">
+        <img class="card-img-top" [src]="user.fotoUrl" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{user.nombreCompleto}}</h5>
+          <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">{{user.correo}}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

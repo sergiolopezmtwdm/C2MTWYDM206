@@ -32,7 +32,8 @@ export class AppComponent implements OnInit, OnDestroy {
     });
     this.signUpSubscription$ = this.oyenteSvc.onListenSignUp().subscribe((user: any) => {
       // console.log(payload);
-      console.log('signUpSubscription');
+      // console.log('signUpSubscription');
+      // console.log(`${JSON.stringify(user)}`);
       this.socket.emit('signUp', {
         fullName: user.displayName,
         email: user.email,
@@ -43,7 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
     this.signInSubscription$ = this.oyenteSvc.onListenSignIn().subscribe((user: any) => {
       // console.log(payload);
-      console.log('signInSubscription');
+      // console.log('signInSubscription');
       // console.log("on oyente sendSignIn");
       this.socket.emit('signIn', {
         fullName: user.displayName,
@@ -52,15 +53,15 @@ export class AppComponent implements OnInit, OnDestroy {
         apiKey: environment.API_KEY
       });
       this.oyenteSvc.email = user.email;
-      console.log("terminando oyente sendSignIn");
+      // console.log("terminando oyente sendSignIn");
     });
     this.logOutSubscription$ = this.oyenteSvc.onListenLogOut().subscribe((user: any) => {
-      console.log('logOutSubscription');
+      // console.log('logOutSubscription');
       // console.log("on oyente sendSignIn");
       this.socket.emit('logOut', {
         email: user.email,
       });
-      console.log("terminando oyente onListenLogOut");
+      // console.log("terminando oyente onListenLogOut");
     });
   }
 

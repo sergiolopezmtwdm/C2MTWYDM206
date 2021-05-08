@@ -60,6 +60,8 @@ transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 #logreg-forms .facebook-btn{  background-color:#3C589C; }
 
 #logreg-forms .google-btn{ background-color: #DF4B3B; }
+#logreg-forms .microsoft-btn{ background-color: gray; }
+#logreg-forms .yahoo-btn{ background-color: purple; }
 
 #logreg-forms .form-reset, #logreg-forms .form-signup{ display: none; }
 

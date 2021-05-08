@@ -2,13 +2,15 @@
   <form class="form-signin">
     <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
     <div class="social-login">
-      <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with
-          Facebook</span> </button>
-      <!-- <button (click)="loginOauth2('Google')" class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with
-          Google+</span> </button> -->
-      <button (click)="sigIn('google')" class="btn google-btn social-btn" type="button"><span><i
+      <button (click)="sigIn('Microsoft')" class="btn microsoft-btn social-btn" type="button"><span><i
+            class="fab fa-microsoft"></i> Sign in with
+          Microsoft</span> </button>
+      <button (click)="sigIn('Google')" class="btn google-btn social-btn" type="button"><span><i
             class="fab fa-google-plus-g"></i> Sign in with
-          Google+</span> </button>
+          Google</span> </button>
+      <button (click)="sigIn('Yahoo')" class="btn yahoo-btn social-btn" type="button"><span><i class="fab fa-yahoo"></i>
+          Sign in with
+          Yahoo</span> </button>
       <!-- <button class="btn btn-success" (click)="loginOauth2('Google')"
         [disabled]="!socket.statusConnect">Enviar</button> -->
     </div>
@@ -32,12 +34,16 @@
 
   <form action="/signup/" class="form-signup">
     <div class="social-login">
-      <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with
-          Facebook</span> </button>
+      <button (click)="signUp('Microsoft')" class="btn microsoft-btn social-btn" type="button"><span><i
+            class="fab fa-microsoft"></i> Sign up with
+          Microsoft</span> </button>
       <div class="social-login">
-        <button (click)="signUp('google')" class="btn google-btn social-btn" type="button"><span><i
+        <button (click)="signUp('Google')" class="btn google-btn social-btn" type="button"><span><i
               class="fab fa-google-plus-g"></i> Sign up with
-            Google+</span> </button>
+            Google</span> </button>
+        <button (click)="signUp('Yahoo')" class="btn yahoo-btn social-btn" type="button"><span><i
+              class="fab fa-yahoo"></i> Sign up with
+            Yahoo</span> </button>
       </div>
     </div>
     <div class="social-login">

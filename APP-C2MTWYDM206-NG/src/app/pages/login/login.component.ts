@@ -45,15 +45,13 @@ export class LoginComponent {
   sigIn(provider: string) {
     this.authSvc.loginOAuth2(provider)
       .then((user: any) => {
+        console.log(`Usuario de OAuth2: ${JSON.stringify(user)}`);
         this.authSvc.login({ correo: user.email, apiKey: '606cbb0d018cc952deb62e05' }).subscribe(async response => {
           await this.authSvc.setlocalStorage(response);
           console.log("send oyente sendSignIn");
-          this.oyenteSvc.sendSignIn({
-            fullName: user.displayName,
-            email: user.email,
-            photoUrl: user.photoURL,
-            apiKey: environment.API_KEY
-          });
+          this.oyenteSvc.sendSignIn(
+            user
+          );
           alert("has iniciado sesión correctamente " + user.displayName);
           this.router.navigate(['home']);
         }, err => {
@@ -77,12 +75,9 @@ export class LoginComponent {
       .then((user: any) => {
         // console.log(user);
         console.log('Autentificado por proveedor correctamente, registrando en nuestra bd...');
-        this.oyenteSvc.sendSignUp({
-          fullName: user.displayName,
-          email: user.email,
-          photoUrl: user.photoURL,
-          apiKey: environment.API_KEY
-        });
+        this.oyenteSvc.sendSignUp(
+          user
+        );
       })
       .catch((error) => {
         console.log(JSON.stringify(error));
