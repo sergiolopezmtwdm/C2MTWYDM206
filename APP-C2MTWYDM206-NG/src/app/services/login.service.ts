@@ -13,8 +13,8 @@ export class LoginService {
   constructor(private jwtHelper: JwtHelperService, private http: HttpClient) { }
 
   public login(credenciales: any) {
-    console.log('entrando al login del svc con las credenciales', credenciales);
-    console.log(`en la uri: ${environment.urlAPI}/loginOAuth2`)
+    // console.log('entrando al login del svc con las credenciales', credenciales);
+    // console.log(`en la uri: ${environment.urlAPI}/loginOAuth2`)
     // return this.http.post(`${endPoint}/loginOAuth2`,
     return this.http.post(`${environment.urlAPI}/loginOAuth2`,
       credenciales, {

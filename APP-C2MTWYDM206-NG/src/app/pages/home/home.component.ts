@@ -1,14 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { SocketioService } from 'src/app/services/socketio.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+  susbription$: Subscription;
 
-  constructor(private router: Router) { }
+  listaUsuarios: any[] = [];
+  constructor(private router: Router, public socket: SocketioService) {
+    this.susbription$ = this.socket.on('broadcast-message').subscribe((userList: any) => {
+      console.log('broadcast-message, ', userList);
+      this.listaUsuarios = userList;
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -27,4 +36,7 @@ export class HomeComponent implements OnInit {
     alert("has salido de tu sesión exitosamente");
   }
 
+  ngOnDestroy(): void {
+    this.susbription$.unsubscribe();
+  }
 }

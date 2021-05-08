@@ -38,8 +38,26 @@ export class LoginComponent implements OnInit, OnDestroy {
   //   });
   // }
 
-  loginOauth2(provider: string) {
-    // console.log('Provider: ', provider);
+  sigIn(provider: string) {
+    this.authSvc.loginOAuth2(provider)
+      .then((user: any) => {
+        this.loginSvc.login({ correo: user.email, apiKey: '606cbb0d018cc952deb62e05' }).subscribe(async response => {
+          await this.loginSvc.setlocalStorage(response);
+          alert("has iniciado sesión correctamente " + user.displayName);
+          this.router.navigate(['home']);
+        }, err => {
+          alert("Inicio de sesión fallida");
+        });
+      })
+      .catch((error) => {
+        return {
+          success: false,
+          error
+        }
+      });
+  }
+
+  signUp(provider: string) {
     this.authSvc.loginOAuth2(provider)
       .then((user: any) => {
         // console.log(user);
@@ -50,16 +68,10 @@ export class LoginComponent implements OnInit, OnDestroy {
           photoUrl: user.photoURL,
           apiKey: environment.API_KEY
         });
-        this.loginSvc.login({ correo: user.email, apiKey: '606cbb0d018cc952deb62e05' }).subscribe(async response => {
-          await this.loginSvc.setlocalStorage(response);
-          // alert("has iniciado sesión correctamente " + (<any>response).nombreCompleto);
-          alert("has iniciado sesión correctamente " + user.displayName);
-          this.router.navigate(['home']);
-        }, err => {
-          alert("Inicio de sesión fallida");
-        });
+        alert("Se ha registrado correctamente.");
       })
       .catch((error) => {
+        alert("Ha ocurrido un error durante su registro.");
         return {
           success: false,
           error

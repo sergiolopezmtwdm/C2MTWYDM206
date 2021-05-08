@@ -8,7 +8,7 @@
           Facebook</span> </button>
       <!-- <button (click)="loginOauth2('Google')" class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with
           Google+</span> </button> -->
-      <button (click)="loginOauth2('google')" class="btn google-btn social-btn" type="button"><span><i
+      <button (click)="sigIn('google')" class="btn google-btn social-btn" type="button"><span><i
             class="fab fa-google-plus-g"></i> Sign in with
           Google+</span> </button>
       <!-- <button class="btn btn-success" (click)="loginOauth2('Google')"
@@ -30,21 +30,21 @@
     <input type="email" id="resetEmail" class="form-control" placeholder="Email address" required="" autofocus="">
     <button class="btn btn-primary btn-block" type="submit">Reset Password</button>
     <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
-  </form>
+  </form> -->
 
   <form action="/signup/" class="form-signup">
     <div class="social-login">
       <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with
           Facebook</span> </button>
       <div class="social-login">
-        <button (click)="loginOauth2('google')" class="btn google-btn social-btn" type="button"><span><i
+        <button (click)="signUp('google')" class="btn google-btn social-btn" type="button"><span><i
               class="fab fa-google-plus-g"></i> Sign up with
             Google+</span> </button>
       </div>
     </div>
     <div class="social-login">
 
-    </div> -->
+    </div>
 
     <!-- <p style="text-align:center">OR</p>
 
@@ -55,8 +55,8 @@
       autofocus="">
 
     <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button> -->
-    <!-- <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
-  </form> -->
+    <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
+  </form>
   <br>
 
 </div>
