@@ -10,7 +10,7 @@ import TokenHelper from "./helpers/token.helper";
 
 // DESCOMENTAR PROD
 // const mongo = MongoHelper.getInstance(ENV.MONGODB, true);
-const mongo = MongoHelper.getInstance(ENV.MONGODB, false);
+const mongo = MongoHelper.getInstance(ENV.MONGODB, true);
 const tokenHelper = TokenHelper(ENV, mongo);
 
 (async () => {

@@ -17,8 +17,8 @@ export function tokenGetter() {
   return localStorage.getItem("jwt");
 }
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
-// const config: SocketIoConfig = { url: 'http://slopezfu-node.com', options: {} };
+// const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const config: SocketIoConfig = { url: 'http://slopezfu-node.com', options: {} };
 
 @NgModule({
   declarations: [
