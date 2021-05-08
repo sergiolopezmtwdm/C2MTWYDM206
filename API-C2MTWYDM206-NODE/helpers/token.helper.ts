@@ -24,7 +24,7 @@ export default (ENV: any, mongo: any) => {
 
     return {
         create: async (payload: any, apiKey: string) => {
-
+            console.log('obteniendo la api key')
             // Utilizr la API KEY para consultar la tabla APP y obtener el SecretKey
             const response: any = await _getSecretKey(apiKey);
 

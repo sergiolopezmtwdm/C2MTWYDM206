@@ -1,29 +1,34 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from "rxjs";
 import { AuthService } from '../../services/auth.service';
 import { SocketioService } from '../../services/socketio.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { stringify } from '@angular/compiler/src/util';
+import { OyenteService } from 'src/app/services/oyente.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
-  title = 'APP-C2MTWYDM206';
-  suscription$: Subscription;
+export class LoginComponent {
 
-  constructor(public socket: SocketioService, private authSvc: AuthService, private router: Router) {
+  // @Input() socket: any;
+
+  // title = 'APP-C2MTWYDM206';
+  // suscription$: Subscription;
+
+  // constructor(public socket: SocketioService, private authSvc: AuthService, private router: Router) {
+  constructor(private authSvc: AuthService, private router: Router, private oyenteSvc: OyenteService) {
     // this.suscription$ = this.socket.on('broadcast-message').subscribe((payload: any) => {
-    this.suscription$ = this.socket.on('broadcast-message').subscribe((payload: any) => {
-      // console.log(payload);
-      console.log(payload);
-    });
+    //   // console.log(payload);
+    //   console.log(payload);
+    // });
   }
 
-  ngOnInit(): void {
-  }
+  // ngOnInit(): void {
+  // }
 
   // public login = () => {
   //   // console.log('intentando logearse');
@@ -42,10 +47,20 @@ export class LoginComponent implements OnInit, OnDestroy {
       .then((user: any) => {
         this.authSvc.login({ correo: user.email, apiKey: '606cbb0d018cc952deb62e05' }).subscribe(async response => {
           await this.authSvc.setlocalStorage(response);
+          console.log("send oyente sendSignIn");
+          this.oyenteSvc.sendSignIn({
+            fullName: user.displayName,
+            email: user.email,
+            photoUrl: user.photoURL,
+            apiKey: environment.API_KEY
+          });
           alert("has iniciado sesión correctamente " + user.displayName);
           this.router.navigate(['home']);
         }, err => {
-          alert("Inicio de sesión fallida");
+          // alert("Inicio de sesión fallida");
+          alert(err.error.response.msg);
+          // alert((<any>err).msg);
+          // alert(JSON.stringify(err));
         });
       })
       .catch((error) => {
@@ -57,19 +72,20 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   signUp(provider: string) {
+    console.log("Autentificado con proveedor");
     this.authSvc.loginOAuth2(provider)
       .then((user: any) => {
         // console.log(user);
-        // console.log('Autentificado correctamente');
-        this.socket.emit('signUp', {
+        console.log('Autentificado por proveedor correctamente, registrando en nuestra bd...');
+        this.oyenteSvc.sendSignUp({
           fullName: user.displayName,
           email: user.email,
           photoUrl: user.photoURL,
           apiKey: environment.API_KEY
         });
-        alert("Se ha registrado correctamente.");
       })
       .catch((error) => {
+        console.log(JSON.stringify(error));
         alert("Ha ocurrido un error durante su registro.");
         return {
           success: false,
@@ -78,8 +94,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
-    this.suscription$.unsubscribe();
-  }
+  // ngOnDestroy(): void {
+  //   this.suscription$.unsubscribe();
+  // }
 
 }

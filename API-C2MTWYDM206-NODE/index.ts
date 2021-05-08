@@ -9,8 +9,8 @@ import SocketLogic from './sockets/socket.logic';
 import TokenHelper from "./helpers/token.helper";
 
 // DESCOMENTAR PROD
-const mongo = MongoHelper.getInstance(ENV.MONGODB, true);
-// const mongo = MongoHelper.getInstance(ENV.MONGODB, false);
+// const mongo = MongoHelper.getInstance(ENV.MONGODB, true);
+const mongo = MongoHelper.getInstance(ENV.MONGODB, false);
 const tokenHelper = TokenHelper(ENV, mongo);
 
 (async () => {
@@ -49,7 +49,6 @@ const tokenHelper = TokenHelper(ENV, mongo);
 
         app.post('/loginOAuth2', async (req: Request, res: Response) => {
             const { correo, apiKey } = req.body
-
             const response: any = await mongo.db.collection('usuarios')
                 .findOne(
                     { correo, isVerify: true },
@@ -109,8 +108,11 @@ const tokenHelper = TokenHelper(ENV, mongo);
             // });
             // Socket connect
             socketLogic.listenSocketConnect(socket);
+            // Logic SignIn
+            socketLogic.signIn(socketIO, socket);
             // Logic SignUp
             socketLogic.signUp(socketIO, socket);
+            socketLogic.logOut(socketIO, socket);
             // Logic Disconnect            
             socketLogic.disconnect(socket);
         });

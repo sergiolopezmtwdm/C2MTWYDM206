@@ -1,3 +1,4 @@
 ------------------- APP HTML -----------------------
 ------------------- {{title}} -----------------------
+<span class="badge bg-{{socket.statusConnect ? 'success': 'danger'}}">{{ title }} {{socket.statusConnect ? 'ONLINE': 'OFFLINE'}}</span>
 <router-outlet></router-outlet>
