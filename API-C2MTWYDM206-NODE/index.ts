@@ -9,8 +9,8 @@ import SocketLogic from './sockets/socket.logic';
 import TokenHelper from "./helpers/token.helper";
 
 // DESCOMENTAR PROD
-// const mongo = MongoHelper.getInstance(ENV.MONGODB, true);
 const mongo = MongoHelper.getInstance(ENV.MONGODB, true);
+// const mongo = MongoHelper.getInstance(ENV.MONGODB, false);
 const tokenHelper = TokenHelper(ENV, mongo);
 
 (async () => {
@@ -52,7 +52,7 @@ const tokenHelper = TokenHelper(ENV, mongo);
             const response: any = await mongo.db.collection('usuarios')
                 .findOne(
                     { correo, isVerify: true },
-                    { projection: { _id: 0, correo: 1, fotoURL: 1, nombreCompleto: 1 } }
+                    { projection: { _id: 0, correo: 1, fotoUrl: 1, nombreCompleto: 1 } }
                 )
                 .then((result: any) => {
                     if (!result) {

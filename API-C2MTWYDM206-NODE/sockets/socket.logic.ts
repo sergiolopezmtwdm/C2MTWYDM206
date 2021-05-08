@@ -66,7 +66,7 @@ export default (mongo: any) => {
         },
         signUp: (io: any, socket: Socket) => {
             socket.on('signUp', async (payload: any) => {
-                console.log("----------------------------> signUp");
+                // console.log("----------------------------> signUp");
                 // Guardando en Base de Datos
                 // await mongo.db.collection('sockets')
                 //     .findOneAndUpdate(
