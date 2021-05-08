@@ -8,7 +8,9 @@ import MongoHelper from "./helpers/mongo.helper";
 import SocketLogic from './sockets/socket.logic';
 import TokenHelper from "./helpers/token.helper";
 
+// DESCOMENTAR PROD
 const mongo = MongoHelper.getInstance(ENV.MONGODB, true);
+// const mongo = MongoHelper.getInstance(ENV.MONGODB, false);
 const tokenHelper = TokenHelper(ENV, mongo);
 
 (async () => {
@@ -21,21 +23,22 @@ const tokenHelper = TokenHelper(ENV, mongo);
         app.use(express.json());
         app.use(compression());
 
-        app.use(cors({ origin: true, credentials: true }));
-        // let whitelist = [
-        //     'http://localhost:4200'
-        // ];
-        // app.use(cors({
-        //     origin: (origin, callback) => {
-        //         // allow requests with no origin
-        //         if (!origin) return callback(null, true);
-        //         if (whitelist.indexOf(origin) === -1) {
-        //             var message = `The CORS policy for this origin doesn't allow access from the particular origin.`;
-        //             return callback(new Error(message), false);
-        //         }
-        //         return callback(null, true);
-        //     }
-        // }));
+        // app.use(cors({ origin: true, credentials: true }));
+        let whitelist = [
+            'http://localhost:4200',
+            'http://slopezfu-ng.com',
+        ];
+        app.use(cors({
+            origin: (origin, callback) => {
+                // allow requests with no origin
+                if (!origin) return callback(null, true);
+                if (whitelist.indexOf(origin) === -1) {
+                    var message = `The CORS policy for this origin doesn't allow access from the particular origin.`;
+                    return callback(new Error(message), false);
+                }
+                return callback(null, true);
+            }
+        }));
 
         app.get('/', (req: Request, res: Response) => {
             res.status(200).json({
